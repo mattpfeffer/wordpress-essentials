@@ -1,12 +1,14 @@
 <?php
 /**
- * Plugin Name:     Wordpress Essentials
- * Description:     A collection of helpful functions and filters to help enforce best practice when working with Wordpress
- * Author:          Matt Pfeffer
- * Text Domain:     essentials
- * Version:         0.1.0
- * Domain Path:     /languages
- * License:         GPL2
+ * Plugin Name:		Wordpress Essentials
+ * Plugin URI:		https://github.com/mattpfeffer/wordpress-essentials
+ * Description:		A collection of useful functions and filters to help enforce best practice when working with Wordpress and common third party plugins.
+ * Author:			Matt Pfeffer
+ * Text Domain:		essentials
+ * Version:			0.1
+ * Domain Path:		/languages
+ * License:			GPL2
+ * License URI:		https://opensource.org/licenses/GPL-2.0
  *
  * @package         Wordpress Essentials
  */
