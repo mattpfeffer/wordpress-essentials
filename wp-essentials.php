@@ -31,6 +31,18 @@ add_filter( 'the_generator', function () {
 });
 
 /**
+ * Block access to XML-RPC. Comment out if trackbacks and pingbacks
+ * are required.
+ *
+ * !! IMPORTANT !!
+ * It's also recommend to block in server configuration
+ * or htaccess as this is a comment attack vector so blocking prior to
+ * the application may provide some perfomance benfits.
+ */
+
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
  *  THIRD PARTY PLUGINS
  *
  * - Functions and filters for common third party plugins
