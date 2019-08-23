@@ -43,6 +43,19 @@ add_filter( 'the_generator', function () {
 add_filter( 'xmlrpc_enabled', '__return_false' );
 
 /**
+ * Block access to the Wordpress REST API. Comment out if API access is
+ * required.
+ *
+ * !! IMPORTANT !!
+ * At present, there are no known vulnerabilities in the Wordpress API but
+ * it's best to dsaible until needed to prevent an additional attack
+ * vector.
+ */
+
+add_filter('rest_enabled', '_return_false');
+add_filter('rest_jsonp_enabled', '_return_false');
+
+/**
  *  THIRD PARTY PLUGINS
  *
  * - Functions and filters for common third party plugins
