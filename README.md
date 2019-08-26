@@ -7,6 +7,9 @@ A collection of useful functions and filters to help enforce best practice when 
 ### Security & Hardening ###
 
 - Remove generator metatag to avoid exposing Wordpress version
+- Disable XML-RPC access
+- Disable REST API access
+- Block enumeration of users
 
 ### Third Party Plugins ###
 

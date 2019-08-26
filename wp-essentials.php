@@ -5,7 +5,7 @@
  * Description:     A collection of useful functions and filters to help enforce best practice when working with Wordpress and common third party plugins.
  * Author:          Matt Pfeffer
  * Text Domain:     essentials
- * Version:         0.1
+ * Version:         0.2
  * Domain Path:     /languages
  * License:         GPL2
  * License URI:     https://opensource.org/licenses/GPL-2.0
@@ -36,7 +36,7 @@ add_filter( 'the_generator', function () {
  *
  * !! IMPORTANT !!
  * It's also recommend to block in server configuration
- * or htaccess as this is a comment attack vector so blocking prior to
+ * or htaccess as this is a common attack vector so blocking prior to
  * the application may provide some perfomance benfits.
  */
 
@@ -52,8 +52,44 @@ add_filter( 'xmlrpc_enabled', '__return_false' );
  * vector.
  */
 
-add_filter('rest_enabled', '_return_false');
-add_filter('rest_jsonp_enabled', '_return_false');
+add_filter( 'rest_enabled', '_return_false' );
+add_filter( 'rest_jsonp_enabled', '_return_false' );
+
+/**
+ * Block enumeration of users.
+ *
+ * !! IMPORTANT !!
+ * It's also recommend to block in server configuration
+ * or htaccess as this is a common attack vector.
+ */
+
+if ( ! is_admin() ) {
+
+	// Default URL format.
+	if ( preg_match( '/author=([0-9]*)/i', $_SERVER['QUERY_STRING'] ) ) {
+		die();
+	}
+	// Permalink URL format.
+	add_filter( 'redirect_canonical', 'check_user_enum_perm', 10, 2 );
+
+}
+
+/**
+ * Checks for user enumeration on permalink style URLs
+ *
+ * @param string $redirect Where to redirect the request.
+ * @param string $request The actual request string.
+ * @return string The location to redirect to as set in $redirect.
+ */
+function check_user_enum_perm( $redirect, $request ) {
+
+	if ( preg_match( '/\?author=([0-9]*)(\/*)/i', $request ) ) {
+		die();
+	} else {
+		return $redirect;
+	}
+
+}
 
 /**
  *  THIRD PARTY PLUGINS
