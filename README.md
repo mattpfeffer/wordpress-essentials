@@ -28,4 +28,4 @@ A collection of useful functions and filters to help enforce best practice when 
 
 ## Usage ##
 
-Designed to be used as a must use plugin, simply place **_wp-essentials.php_** and the _wp-essentials/_ folder in your _mu-plugins_ folder. This folder can be created uder _/wp-content_ if it doesn't already exist.
+Designed to be used as a must use plugin, simply place **_wp-essentials.php_** and **_wp-essentials/_** in your _mu-plugins_ folder. This folder can be created uder _/wp-content_ if it doesn't already exist.
