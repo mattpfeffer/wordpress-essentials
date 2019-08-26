@@ -1,6 +1,7 @@
 ### Dependencies & Build Files ###
 
 vendor/
+!wp-essentials/vendor/
 
 ### Compiled Files ###
 

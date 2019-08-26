@@ -5,13 +5,15 @@
  * Description:     A collection of useful functions and filters to help enforce best practice when working with Wordpress and common third party plugins.
  * Author:          Matt Pfeffer
  * Text Domain:     essentials
- * Version:         0.2
+ * Version:         0.3
  * Domain Path:     /languages
  * License:         GPL2
  * License URI:     https://opensource.org/licenses/GPL-2.0
  *
  * @package         Wordpress Essentials
  */
+
+require 'wp-essentials/vendor/autoload.php';
 
 /**
  *  SECURITY & HARDENING
@@ -90,6 +92,97 @@ function check_user_enum_perm( $redirect, $request ) {
 	}
 
 }
+
+/**
+ *  FEATURES
+ *
+ * - Functions and filters to enable or enhance functionality
+ */
+
+/**
+ * Enable SVG uploads in media library.
+ *
+ * @param Array $mimes List of existing mime types to act on.
+ * @return string Filtered list of mime types.
+ */
+function enable_svg( $mimes ) {
+
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+
+}
+
+add_filter( 'upload_mimes', 'enable_svg' );
+
+/**
+ * Sanitize SVGs on upload.
+ *
+ * @param Array $file The Wordpress file array.
+ * @return Array The resulting Wordpress file array.
+ */
+function sanitize_svg( $file ) {
+
+	if ( 'image/svg+xml' == $file['type'] ) {
+
+		$sanitizer = new enshrined\svgSanitize\Sanitizer();
+		$sanitizer->minify( true );
+
+		$raw = file_get_contents( $file['tmp_name'] );
+
+		$sanitized = $sanitizer->sanitize( $raw );
+
+		if ( $sanitized ) {
+			file_put_contents( $file['tmp_name'], $sanitized );
+		} else {
+			$file['error'] = "Sorry, this file couldn't be safely uploaded";
+		}
+	}
+
+	return $file;
+
+}
+
+add_filter( 'wp_handle_upload_prefilter', 'sanitize_svg' );
+
+/**
+ * Filters the attachment data prepared for JavaScript to add the sizes array to the response
+ *
+ * @param array $response Array of attachment data.
+ * @return array Resulting array of attachment data.
+ */
+function enable_svg_preview( $response ) {
+
+	if ( 'image/svg+xml' == $response['mime'] ) {
+
+		$image_sizes = apply_filters( 'image_size_names_choose', array(
+			'thumbnail' => 'Thumbnail',
+			'medium'    => 'Medium',
+			'large'     => 'Large',
+		) );
+
+		$sizes = array();
+
+		foreach ( $image_sizes as $size => $label ) {
+			$default_height = 2000;
+			$default_width  = 2000;
+
+			$sizes[ $size ] = array(
+				'height'      => get_option( "{$size}_size_w", $default_height ),
+				'width'       => get_option( "{$size}_size_h", $default_width ),
+				'url'         => $response['url'],
+				'orientation' => 'portrait',
+			);
+		}
+
+		$response['sizes'] = $sizes;
+		$response['icon']  = $response['url'];
+	}
+
+	return $response;
+
+}
+
+add_filter( 'wp_prepare_attachment_for_js', 'enable_svg_preview' );
 
 /**
  *  THIRD PARTY PLUGINS

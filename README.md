@@ -11,6 +11,11 @@ A collection of useful functions and filters to help enforce best practice when 
 - Disable REST API access
 - Block enumeration of users
 
+### Features ###
+
+- Safely enable support for SVGs in the media library
+- Display previews for SVGs in the media library
+
 ### Third Party Plugins ###
 
 #### Advanced Custom Fields ####
@@ -23,4 +28,4 @@ A collection of useful functions and filters to help enforce best practice when 
 
 ## Usage ##
 
-Designed to be used as a must use plugin, simply place **_wp-essentials.php_** in your _mu-plugins_ folder. This folder can be created uder _/wp-content_ if it doesn't already exist.
+Designed to be used as a must use plugin, simply place **_wp-essentials.php_** and the _wp-essentials/_ folder in your _mu-plugins_ folder. This folder can be created uder _/wp-content_ if it doesn't already exist.
