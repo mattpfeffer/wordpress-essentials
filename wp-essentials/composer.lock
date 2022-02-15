@@ -8,21 +8,26 @@
     "packages": [
         {
             "name": "enshrined/svg-sanitize",
-            "version": "0.10.0",
+            "version": "0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darylldoyle/svg-sanitizer.git",
-                "reference": "5344d8511e494adf160f71f4b34024d3a3c66c82"
+                "reference": "17e12ba9c2881caa6b167d0fbea555c11207fbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/5344d8511e494adf160f71f4b34024d3a3c66c82",
-                "reference": "5344d8511e494adf160f71f4b34024d3a3c66c82",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/17e12ba9c2881caa6b167d0fbea555c11207fbb0",
+                "reference": "17e12ba9c2881caa6b167d0fbea555c11207fbb0",
                 "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": "^7.0 || ^8.0"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "^0.1.2",
-                "phpunit/phpunit": "^6"
+                "phpunit/phpunit": "^6.5 || ^8.5"
             },
             "type": "library",
             "autoload": {
@@ -32,7 +37,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -41,7 +46,11 @@
                 }
             ],
             "description": "An SVG sanitizer for PHP",
-            "time": "2019-01-11T12:31:32+00:00"
+            "support": {
+                "issues": "https://github.com/darylldoyle/svg-sanitizer/issues",
+                "source": "https://github.com/darylldoyle/svg-sanitizer/tree/0.15.0"
+            },
+            "time": "2022-02-13T00:42:56+00:00"
         }
     ],
     "packages-dev": [],
@@ -51,5 +60,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
